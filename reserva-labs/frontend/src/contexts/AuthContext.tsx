@@ -1,60 +1,67 @@
-"use client"
+"use client";
 
-import type React from "react"
-import { createContext, useContext, useState, type ReactNode } from "react"
-import type { User } from "../types"
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  type ReactNode,
+} from "react";
+import type { User } from "../types";
+import { login as loginRequest } from "../services/authService"; // usa a função real
 
 interface AuthContextType {
-  user: User | null
-  login: (email: string, password: string) => Promise<void>
-  logout: () => void
-  register: (email: string, password: string) => Promise<void>
-  isAuthenticated: boolean
+  user: User | null;
+  login: (email: string, password: string) => Promise<void>;
+  logout: () => void;
+  isAuthenticated: boolean;
 }
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined)
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const useAuth = () => {
-  const context = useContext(AuthContext)
+  const context = useContext(AuthContext);
   if (!context) {
-    throw new Error("useAuth must be used within an AuthProvider")
+    throw new Error("useAuth must be used within an AuthProvider");
   }
-  return context
-}
+  return context;
+};
 
 interface AuthProviderProps {
-  children: ReactNode
+  children: ReactNode;
 }
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [user, setUser] = useState<User | null>(null)
+  const [user, setUser] = useState<User | null>(null);
 
   const login = async (email: string, password: string) => {
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000))
-
-    const mockUser: User = {
-      id: "1",
-      name: "Usuário Teste",
-      email: email,
-      role: email.includes("admin") ? "admin" : "student",
-      department: "Departamento de Informática",
-      campus: "IFMS - Campus Três Lagoas",
-      memberSince: "Março 2020",
-    }
-
-    setUser(mockUser)
-  }
+    const data = await loginRequest(email, password); // faz chamada real
+    const newUser: User = {
+  id: data.user_id,
+  name: data.name,
+  email: data.email,
+  role: data.role,
+  department: data.department,
+  campus: data.campus,
+  memberSince: data.memberSince,
+}
+;
+    setUser(newUser);
+    localStorage.setItem("user", JSON.stringify(newUser)); // persiste
+  };
 
   const logout = () => {
-    setUser(null)
-  }
+    setUser(null);
+    localStorage.removeItem("user");
+  };
 
-  const register = async (email: string, password: string) => {
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000))
-    await login(email, password)
-  }
+  // Carrega user ao abrir o app
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
 
   return (
     <AuthContext.Provider
@@ -62,11 +69,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         user,
         login,
         logout,
-        register,
         isAuthenticated: !!user,
       }}
     >
       {children}
     </AuthContext.Provider>
-  )
-}
+  );
+};

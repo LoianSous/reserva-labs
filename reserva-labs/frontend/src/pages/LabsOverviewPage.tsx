@@ -30,6 +30,7 @@ import {
 
 const LabsOverviewPage: React.FC = () => {
   const { user, logout } = useAuth()
+  console.log("user no LabsOverviewPage:", user);
   const [activeTab, setActiveTab] = useState("Todos")
   const [showNewAppointment, setShowNewAppointment] = useState(false)
   const [showUserProfile, setShowUserProfile] = useState(false)

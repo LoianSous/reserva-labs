@@ -17,18 +17,16 @@ function Login(){
   const [isLoading, setIsLoading] = useState(false)
   
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsLoading(true)
-    try {
-      const data = await login(email, senha)
-      localStorage.setItem('user_id', data.user_id);
-      navigate('/usuario')
-    } catch (error) {
-      console.error("Email ou senha inválidos!", error)
-    } finally {
-      setIsLoading(false)
-    }
-
+  e.preventDefault();
+  setIsLoading(true);
+  try {
+    await login(email, senha); 
+    navigate("/laboratorios");
+  } catch (error) {
+    console.error("Email ou senha inválidos!", error);
+  } finally {
+    setIsLoading(false);
+  }
 };
 
 
@@ -111,7 +109,7 @@ function Login(){
           <div className="mt-8 text-center">
             <p className="text-gray-600">
               Não tem uma conta?{" "}
-              <button className="text-green-600 hover:text-green-700 font-medium">Cadastre-se</button>
+              <button type='button' onClick={() => navigate("/cadastro")} className="text-green-600 hover:text-green-700 font-medium">Cadastre-se</button>
             </p>
           </div>
         </div>

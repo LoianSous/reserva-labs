@@ -2,30 +2,30 @@
 
 import type React from "react"
 import { useState } from "react"
-import { useAuth } from "../contexts/AuthContext"
 import Layout from "../components/Layout"
 import { BookOpen, Eye, EyeOff } from "lucide-react"
+import { cadastro } from "../services/authService"
 
 const RegisterPage: React.FC = () => {
+  const [nome, setNome] = useState("")
   const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const [senha, setSenha] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [rememberMe, setRememberMe] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-  const { register } = useAuth()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (password !== confirmPassword) {
+    if (senha !== confirmPassword) {
       alert("As senhas não coincidem")
       return
     }
 
     setIsLoading(true)
     try {
-      await register(email, password)
+      await cadastro(nome, email, senha)
     } catch (error) {
       console.error("Registration failed:", error)
     } finally {
@@ -47,6 +47,21 @@ const RegisterPage: React.FC = () => {
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
+              <label htmlFor="nome" className="block text-sm font-medium text-gray-700 mb-2">
+                Nome
+              </label>
+              <input
+                id="nome"
+                type="name"
+                value={nome}
+                onChange={(e) => setNome(e.target.value)}
+                placeholder="Digite seu nome"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                required
+              />
+            </div>
+
+            <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
                 Email
               </label>
@@ -67,10 +82,10 @@ const RegisterPage: React.FC = () => {
               </label>
               <div className="relative">
                 <input
-                  id="password"
+                  id="senha"
                   type={showPassword ? "text" : "password"}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  value={senha}
+                  onChange={(e) => setSenha(e.target.value)}
                   placeholder="Digite sua senha"
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent pr-12"
                   required

@@ -27,11 +27,12 @@ class Reserva(db.Model):
         return f'<Reserva de {self.usuario} em {self.data} das {self.hora_inicio} às {self.hora_fim}'
 
 class User(db.Model):
-    __tablename__ = 'user'
+    __tablename__ = 'user'  
 
     id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(100), unique = True, nullable=False)
+    email = db.Column(db.String(100), unique=True, nullable=False)
     senha = db.Column(db.String(100), nullable=False)
+
     
 
 
