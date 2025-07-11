@@ -33,7 +33,26 @@ def get_laboratorios():
     resultado = [{"id": lab.id, "nome": lab.nome} for lab in laboratorios]
     return jsonify(resultado)
 
-# Rota de listagem de reservas/agendamentos
+# Rota de listagem de reservas/agendamentos POST
+# @bp.route('/reservas', methods=['POST'])
+# def get_reservas():
+#     reservas = Reserva.query.all()
+#     resultado = []
+
+#     for r in reservas:
+#         resultado.append({
+#             "id": r.id,
+#             "usuario": r.usuario,
+#             "laboratorio_id": r.laboratorio_id,
+#             "laboratorio_nome": r.laboratorio.nome,
+#             "data": r.data.strftime('%Y-%m-%d'),
+#             "hora_inicio": r.hora_inicio.strftime('%H:%M'),
+#             "hora_fim": r.hora_fim.strftime('%H:%M')
+#         })
+
+#     return jsonify(resultado)
+
+# Rota de listagem de reservas/agendamentos GET
 @bp.route('/reservas', methods=['GET'])
 def get_reservas():
     reservas = Reserva.query.all()

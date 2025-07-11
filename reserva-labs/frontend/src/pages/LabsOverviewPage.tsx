@@ -5,35 +5,22 @@ import { useState } from "react"
 import { useAuth } from "../contexts/AuthContext"
 import type { Lab } from "../types"
 import ModalNovoAgendamento from "../components/ModalNovoAgendamento"
+import ModalReservas from "../components/ModalReservas"
 import PerfilUsuarioCard from "../components/PerfilUsuarioCard"
-import { 
-  Calendar, 
-  User, 
-  Building2, 
-  X, 
-  Plus, 
-  Clock, 
-  Users, 
-  FileText, 
-  Repeat, 
-  MapPin, 
-  Edit3, 
-  Trash2, 
-  Eye, 
-  Filter,
-  Search,
-  ChevronDown,
-  CheckCircle,
-  AlertCircle,
-  XCircle
+import {
+  Calendar,
+  User,
+  Plus
 } from 'lucide-react';
 
 const LabsOverviewPage: React.FC = () => {
   const { user, logout } = useAuth()
-  console.log("user no LabsOverviewPage:", user);
   const [activeTab, setActiveTab] = useState("Todos")
   const [showNewAppointment, setShowNewAppointment] = useState(false)
   const [showUserProfile, setShowUserProfile] = useState(false)
+
+  // ✅ Novo estado para abrir o modal de reservas
+  const [selectedLabForReservations, setSelectedLabForReservations] = useState<Lab | null>(null)
 
   const tabs = ["Todos", "Hotel Tecnológico", "IF Maker", "Eletrônica"]
 
@@ -169,7 +156,10 @@ const LabsOverviewPage: React.FC = () => {
                   <button className="text-gray-400 hover:text-gray-600">
                     <Plus className="w-4 h-4" />
                   </button>
-                  <button className="text-gray-400 hover:text-gray-600">
+                  <button
+                    onClick={() => setSelectedLabForReservations(lab)}
+                    className="text-gray-400 hover:text-gray-600"
+                  >
                     <Calendar className="w-4 h-4" />
                   </button>
                 </div>
@@ -197,6 +187,14 @@ const LabsOverviewPage: React.FC = () => {
 
       {showUserProfile && user && (
         <PerfilUsuarioCard user={user} onClose={() => setShowUserProfile(false)} onLogout={logout} />
+      )}
+
+      {/* ✅ Modal de Reservas */}
+      {selectedLabForReservations && (
+        <ModalReservas
+          lab={selectedLabForReservations}
+          onClose={() => setSelectedLabForReservations(null)}
+        />
       )}
     </div>
   )
