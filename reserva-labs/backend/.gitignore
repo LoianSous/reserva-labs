@@ -1,6 +1,3 @@
-Ignora o banco de dados SQLite
-*.db
-
 Arquivos temporários do Python
 pycache/
 *.pyc
