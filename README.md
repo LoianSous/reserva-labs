@@ -8,19 +8,24 @@ A aplicação possui um **frontend moderno em React** e um **backend em Python (
 cd backend
 
 *Instale as dependências*
+
 pip install -r requirements.txt
 
 *Execute o servidor backend*
+
 python run.py
 
 *Volte para a raiz do projeto (caso esteja no /backend)*
+
 cd ..
 cd frontend
 
 *Instale as dependências do frontend*
+
 npm install
 
 *Inicie o servidor de desenvolvimento*
+
 npm run dev
 
 ---
