@@ -5,6 +5,7 @@ import { useState } from "react"
 import { X, User, Mail, Building, MapPin, Calendar, Edit, Settings, Shield, LogOut } from "lucide-react"
 import type { User as UserType } from "../types"
 import ModalEditarPerfil from "./ModalEditarPerfil"
+import { useNavigate } from "react-router-dom";
 
 interface PerfilUsuarioCardProps {
   user: UserType
@@ -14,6 +15,7 @@ interface PerfilUsuarioCardProps {
 
 const PerfilUsuarioCard: React.FC<PerfilUsuarioCardProps> = ({ user, onClose, onLogout }) => {
   const [showEditProfile, setShowEditProfile] = useState(false)
+  const navigate = useNavigate();
 
   const handleSaveProfile = (userData: Partial<UserType>) => {
     console.log("Saving profile:", userData)
@@ -86,12 +88,16 @@ const PerfilUsuarioCard: React.FC<PerfilUsuarioCardProps> = ({ user, onClose, on
               </button>
 
               <button
-                onClick={onLogout}
-                className="w-full flex items-center px-3 py-2 text-sm text-red-600 hover:bg-red-50 rounded-lg"
-              >
-                <LogOut className="w-4 h-4 mr-3" />
-                Sair da Conta
-              </button>
+  onClick={() => {
+    onLogout();
+    navigate("/");
+  }}
+  className="w-full flex items-center px-3 py-2 text-sm text-red-600 hover:bg-red-50 rounded-lg"
+>
+  <LogOut className="w-4 h-4 mr-3" />
+  Sair da Conta
+</button>
+
             </div>
           </div>
         </div>

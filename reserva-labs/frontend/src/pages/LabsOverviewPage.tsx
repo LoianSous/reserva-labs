@@ -83,25 +83,14 @@ const LabsOverviewPage: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
-              <div className="flex items-center">
-                <div className="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center mr-3">
-                  <div className="grid grid-cols-3 gap-0.5">
-                    <div className="w-1 h-1 bg-red-500 rounded-sm"></div>
-                    <div className="w-1 h-1 bg-white rounded-sm"></div>
-                    <div className="w-1 h-1 bg-white rounded-sm"></div>
-                    <div className="w-1 h-1 bg-white rounded-sm"></div>
-                    <div className="w-1 h-1 bg-white rounded-sm"></div>
-                    <div className="w-1 h-1 bg-white rounded-sm"></div>
-                    <div className="w-1 h-1 bg-white rounded-sm"></div>
-                    <div className="w-1 h-1 bg-white rounded-sm"></div>
-                    <div className="w-1 h-1 bg-white rounded-sm"></div>
-                  </div>
-                </div>
-                <div>
-                  <div className="font-bold text-sm">INSTITUTO FEDERAL</div>
-                  <div className="text-xs text-gray-600">Mato Grosso do Sul</div>
-                </div>
-              </div>
+              <div className="w-40 h-16 flex items-center">
+  <img
+    src="/img/ifms-tl-marca-2015.png"
+    alt="Logo IFMS"
+    className="h-full object-contain"
+  />
+</div>
+
             </div>
 
             <div className="flex items-center space-x-4">

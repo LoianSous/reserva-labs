@@ -9,27 +9,15 @@ const Layout: React.FC<LayoutProps> = ({ children, showBranding = false }) => {
   if (showBranding) {
     return (
       <div className="min-h-screen flex">
-        {/* Left side - IFMS Branding */}
         <div className="flex-1 bg-gradient-to-br from-green-400 to-green-600 p-12 text-white flex flex-col justify-center">
           <div className="mb-8">
-            <div className="flex items-center mb-4">
-              <div className="w-12 h-12 bg-white bg-opacity-20 rounded-lg flex items-center justify-center mr-4">
-                <div className="grid grid-cols-3 gap-1">
-                  <div className="w-2 h-2 bg-red-500 rounded-sm"></div>
-                  <div className="w-2 h-2 bg-green-300 rounded-sm"></div>
-                  <div className="w-2 h-2 bg-green-300 rounded-sm"></div>
-                  <div className="w-2 h-2 bg-green-300 rounded-sm"></div>
-                  <div className="w-2 h-2 bg-green-300 rounded-sm"></div>
-                  <div className="w-2 h-2 bg-green-300 rounded-sm"></div>
-                  <div className="w-2 h-2 bg-green-300 rounded-sm"></div>
-                  <div className="w-2 h-2 bg-green-300 rounded-sm"></div>
-                  <div className="w-2 h-2 bg-green-300 rounded-sm"></div>
-                </div>
-              </div>
-              <div>
-                <div className="font-bold text-lg">INSTITUTO FEDERAL</div>
-                <div className="text-sm opacity-90">Mato Grosso do Sul</div>
-                <div className="text-sm opacity-90">Campus Três Lagoas</div>
+            <div className="mb-8">
+              <div className="inline-block bg-white rounded-xl shadow-md p-2">
+                <img
+                  src="/img/ifms-tl-marca-2015.png"
+                  alt="Logo IFMS"
+                  className="h-20 w-auto object-contain"
+                />
               </div>
             </div>
           </div>
@@ -42,8 +30,6 @@ const Layout: React.FC<LayoutProps> = ({ children, showBranding = false }) => {
             </p>
           </div>
         </div>
-
-        {/* Right side - Content */}
         <div className="flex-1 bg-gray-50 flex items-center justify-center p-8">{children}</div>
       </div>
     )

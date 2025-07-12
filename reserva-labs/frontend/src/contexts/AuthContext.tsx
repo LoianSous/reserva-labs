@@ -8,7 +8,7 @@ import React, {
   type ReactNode,
 } from "react";
 import type { User } from "../types";
-import { login as loginRequest } from "../services/authService"; // usa a função real
+import { login as loginRequest } from "../services/authService"; 
 
 interface AuthContextType {
   user: User | null;
@@ -64,7 +64,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     localStorage.removeItem("user");
   };
 
-  // Carrega user ao abrir o app
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     console.log("🧠 Carregando do localStorage:", storedUser);
