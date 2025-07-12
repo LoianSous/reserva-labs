@@ -5,33 +5,36 @@ import { useState } from "react"
 import Layout from "../components/Layout"
 import { BookOpen, Eye, EyeOff } from "lucide-react"
 import { useNavigate } from "react-router-dom"
-import {login} from '../services/authService'
 import FeedbackAlert from "../components/FeedbackAlert"
+import { useAuth } from "../contexts/AuthContext"
 
-function Login(){
-
+function Login() {
   const [email, setEmail] = useState("")
   const [senha, setSenha] = useState("")
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   const [showPassword, setShowPassword] = useState(false)
   const [rememberMe, setRememberMe] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [feedback, setFeedback] = useState<{ message: string; type: "success" | "error" } | null>(null)
-  
+
+  const { login: authLogin } = useAuth()
+
   const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  setIsLoading(true);
-  try {
-    await login(email, senha); 
-    setFeedback({ message: "Login realizado com sucesso!", type: "success"})
-    setTimeout(() => navigate("/laboratorios"), 2000)
-  } catch (error) {
-    console.error("Email ou senha inválidos!", error);
-    setFeedback({ message: "Email ou senha inválidas!", type: "error"})
-  } finally {
-    setIsLoading(false);
+    e.preventDefault()
+    setIsLoading(true)
+    try {
+      await authLogin(email, senha)
+      setFeedback({ message: "Login realizado com sucesso!", type: "success" })
+      setTimeout(() => {
+        window.location.href = "/laboratorios"
+      }, 2000)
+    } catch (error) {
+      console.error("Email ou senha inválidos!", error)
+      setFeedback({ message: "Email ou senha inválidas!", type: "error" })
+    } finally {
+      setIsLoading(false)
+    }
   }
-};
 
   return (
     <>

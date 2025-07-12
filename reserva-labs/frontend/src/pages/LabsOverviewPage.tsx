@@ -73,6 +73,8 @@ const LabsOverviewPage: React.FC = () => {
   ]
 
   const filteredLabs = activeTab === "Todos" ? labs : labs.filter((lab) => lab.category === activeTab)
+  console.log("Usuário autenticado:", user)
+  console.log("Mostrar modal de perfil:", showUserProfile)
 
   return (
     <div className="min-h-screen bg-gray-50">

@@ -35,22 +35,31 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
 
   const login = async (email: string, password: string) => {
-    const data = await loginRequest(email, password); // faz chamada real
-    const newUser: User = {
-  id: data.user_id,
-  name: data.name,
-  email: data.email,
-  role: data.role,
-  department: data.department,
-  campus: data.campus,
-  memberSince: data.memberSince,
-}
-;
-    setUser(newUser);
-    localStorage.setItem("user", JSON.stringify(newUser)); // persiste
+    try {
+      const data = await loginRequest(email, password);
+
+      const newUser: User = {
+        id: data.user_id,
+        name: data.name,
+        email: data.email,
+        role: data.role,
+        department: data.department,
+        campus: data.campus,
+        memberSince: data.memberSince,
+      };
+
+      console.log("🔐 Login bem-sucedido! Salvando no localStorage:", newUser);
+
+      setUser(newUser);
+      localStorage.setItem("user", JSON.stringify(newUser));
+    } catch (err) {
+      console.error("❌ Erro ao logar:", err);
+      throw err;
+    }
   };
 
   const logout = () => {
+    console.log("🚪 Logout efetuado!");
     setUser(null);
     localStorage.removeItem("user");
   };
@@ -58,6 +67,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   // Carrega user ao abrir o app
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
+    console.log("🧠 Carregando do localStorage:", storedUser);
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     }
