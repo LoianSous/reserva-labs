@@ -4,23 +4,23 @@ Este repositório contém o sistema web desenvolvido para facilitar o **agendame
 
 A aplicação possui um **frontend moderno em React** e um **backend em Python (Flask)**. O objetivo é permitir uma gestão eficiente do uso dos laboratórios de informática, com controle de agendamentos e visualização de disponibilidade em tempo real.
 
-Como rodar o projeto:
+# Como rodar o projeto:
 cd backend
 
-# Instale as dependências
+*Instale as dependências*
 pip install -r requirements.txt
 
-# Execute o servidor backend
+*Execute o servidor backend*
 python run.py
 
-# Volte para a raiz do projeto (caso esteja no /backend)
+*Volte para a raiz do projeto (caso esteja no /backend)*
 cd ..
 cd frontend
 
-# Instale as dependências do frontend
+*Instale as dependências do frontend*
 npm install
 
-# Inicie o servidor de desenvolvimento
+*Inicie o servidor de desenvolvimento*
 npm run dev
 
 ---
