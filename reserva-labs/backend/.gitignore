@@ -1,0 +1,12 @@
+
+Arquivos temporários do Python
+pycache/
+*.pyc
+*.pyo
+
+Ambientes virtuais
+venv/
+.env
+
+Logs
+*.log
